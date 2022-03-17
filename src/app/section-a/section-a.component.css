@@ -15,7 +15,7 @@ strong {
   margin-bottom: 10px;
 }
 .container {
-  text-align: center;
+  text-align: left;
   margin-top: 40px;
   padding-left: 25px;
 }
@@ -52,4 +52,230 @@ button {
 .btn-container {
   display: flex;
   justify-content: flex-start;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.container {
+  text-align: center;
+  margin-top: 40px;
+  width: 100vw;
+}
+strong {
+  margin-bottom: 10px;
+}
+h2 {
+  text-decoration: underline;
+  font-family: "Times New Roman", Times, serif;
+}
+p {
+  font-family: "Times New Roman", Times, serif;
+}
+button {
+  margin-right: 20px;
+  box-shadow: 0px 0px 4px 4px #dbdbdb;
+  margin-bottom: 8px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+
+
+.btn-container {
+  display: flex;
+  justify-content: flex-start;
+}
+.sub-head {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Times New Roman", Times, serif;
+  text-align: start;
+  margin-top: 10px;
+}
+.message {
+  text-align: start;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 2px;
+}
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-left: 20px;
+  width: 70vw;
+  text-align: left;
+}
+
+.align {
+  text-align: left;
+}
+
+mat-checkbox{
+  padding: 0px;
+}
+.active{
+  background-color: whitesmoke;
+  font-weight: 600;
+}
+
+::ng-deep .mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+.w-50{
+  width: 50% ;
+}
+.form-container{
+  text-align: left;
+}
+.btn-container2{
+  display: flex;
+  justify-content: center;
+}
+.width-100 {
+  width: 70vw;
+  display: block;
+}
+
+h2 {
+  margin-top: 50px;
+  text-decoration: underline;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.nav-container {
+  text-align: center;
+}
+
+.width-50 {
+  display: inline-block;
+  width: 40vw;
+}
+
+.width-30 {
+  width: 20vw;
+}
+
+.sub-group-block {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+button {
+  margin-right: 20px;
+  box-shadow: 0px 0px 4px 4px #dbdbdb;
+  margin-bottom: 8px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.margin-left {
+  margin-left: 2vw;
+}
+.margin-left-10 {
+  margin-left: 3.2vw;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.sub-head {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Times New Roman", Times, serif;
+  text-align: start;
+}
+
+.footer-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+/* add below classes*/
+.pd-5{
+  padding-left: 32px;
+}
+.pd-3{
+  padding-left: 12px;
+}
+.active{
+  background-color: whitesmoke;
+  font-weight: 600;
+}
+
+.width-40{
+  width: 630px;
+}
+.signature-box {
+  border-style: dashed;
+  border-width: 1px;
+  margin-bottom: 20px;
+  background-color: #fdf8f6;
+  padding: 30px;
+  text-align: end;
+  width: 30vw;
+  padding-top: 70px;
+}
+.signature-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  margin-right: 20px;
+  box-shadow: 0px 0px 4px 4px #dbdbdb;
+  margin-bottom: 8px;
+  font-family: "Times New Roman", Times, serif;
+}
+.sub-head {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Times New Roman", Times, serif;
+  text-align: start;
+}
+.active{
+  background-color: whitesmoke;
+  font-weight: 600;
+}
+h2 {
+  margin-top: 50px;
+  text-decoration: underline;
+}
+
+.nav-container {
+  text-align: center;
+}
+.footer-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.secB-date-field{
+  text-align: left;
+}
+.container {
+  text-align: left;
+  margin-top: 40px;
+  padding-left: 25px;
 }

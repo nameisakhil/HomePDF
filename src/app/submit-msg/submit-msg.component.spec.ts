@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SectionCFormFComponent } from './section-cform-f.component';
+import { SubmitMsgComponent } from './submit-msg.component';
 
-describe('SectionCFormFComponent', () => {
-  let component: SectionCFormFComponent;
-  let fixture: ComponentFixture<SectionCFormFComponent>;
+describe('SubmitMsgComponent', () => {
+  let component: SubmitMsgComponent;
+  let fixture: ComponentFixture<SubmitMsgComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SectionCFormFComponent ]
+      declarations: [ SubmitMsgComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SectionCFormFComponent);
+    fixture = TestBed.createComponent(SubmitMsgComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
