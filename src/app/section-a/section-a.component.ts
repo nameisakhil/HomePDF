@@ -7,6 +7,7 @@ import { SignaturePad } from 'angular2-signaturepad';
 import { FormService } from '../shared/form.service';
 import { SubmitMsgComponent } from '../submit-msg/submit-msg.component';
 import { Router } from '@angular/router';
+import { UpdateMsgComponent } from '../update-msg/update-msg.component';
 
 
 
@@ -84,88 +85,133 @@ export class SectionAComponent implements OnInit {
     this.step = this.step -1;
   }
 
-  onAdd(){
+  gotSec2(){
+    this.step = 2;
+  }
+
+  gotSec1(){
+    this.step = 1;
+  }
+  gotSec3(){
+    this.step = 3;
+  }
+  gotSec4(){
+    this.step = 4;
+  }
+  gotoNext(){
     if (this.step == 1){
       if (this.formService.Form1.get('sectionA').valid){
         const dialogRef = this.dialog.open(SuccessMsgComponent);
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result == true){
           this.step = this.step + 1;
-          // console.log(`Dialog result: ${result}`);
+          }
         });
-        // console.log(this.formService.Form1.value);
-        //console.log(this.formService.Form1.value.sectionA);
-
       }
       else{
         const dialogRef = this.dialog.open(FailureMsgComponent);
-
-          dialogRef.afterClosed().subscribe(result => {
-            // console.log(`Dialog result: ${result}`);
-          });
-      // console.log(this.formService.Form1.value);
       }
-    }else if(this.step == 2){
-
+    }
+    if (this.step == 2){
       if (this.formService.Form1.get('sectionB').valid){
         const dialogRef = this.dialog.open(SuccessMsgComponent);
 
-        dialogRef.afterClosed().subscribe(result => {
-          this.step = this.step + 1;
-          // console.log(`Dialog result: ${result}`);
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result == true){
+            this.step = this.step + 1;
+          }
         });
-        // console.log(this.formService.Form1.value);
-
       }
       else{
         const dialogRef = this.dialog.open(FailureMsgComponent);
-
-          dialogRef.afterClosed().subscribe(result => {
-            // console.log(`Dialog result: ${result}`);
-          });
-      // console.log(this.formService.Form1.value);
       }
-    }else if(this.step == 3){
+    }
+    if (this.step == 3){
       if (this.formService.Form1.get('sectionC').valid){
         const dialogRef = this.dialog.open(SuccessMsgComponent);
-        dialogRef.afterClosed().subscribe(result => {
-          this.step = this.step + 1;
-          // console.log(`Dialog result: ${result}`);
-        });
-        // console.log(this.formService.Form1.value);
 
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result == true){
+            this.step = this.step + 1;
+          }
+        });
       }
       else{
         const dialogRef = this.dialog.open(FailureMsgComponent);
-
-          dialogRef.afterClosed().subscribe(result => {
-            // console.log(`Dialog result: ${result}`);
-          });
-      // console.log(this.formService.Form1.value);
       }
+    }
+  }
+
+  onAdd(){
+    if (this.step == 1){
+      const dialogRef = this.dialog.open(UpdateMsgComponent);
+         dialogRef.afterClosed().subscribe((result) => {
+         if (result == true){
+           this.formService.updateUser(this.formService.Form1.value);
+           this.router.navigate(['/']);
+         }
+       });
+    }else if(this.step == 2){
+      const dialogRef = this.dialog.open(UpdateMsgComponent);
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result == true){
+            this.formService.updateUser(this.formService.Form1.value);
+            this.router.navigate(['/']);
+          }
+        });
+    }else if(this.step == 3){
+      const dialogRef = this.dialog.open(UpdateMsgComponent);
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result == true){
+            this.formService.updateUser(this.formService.Form1.value);
+            this.router.navigate(['/']);
+          }
+        });
     }else if(this.step == 4) {
       if (this.formService.Form1.get('sectionD').valid){
-        const dialogRef = this.dialog.open(SubmitMsgComponent);
-        dialogRef.afterClosed().subscribe(result => {
-          // console.log(`Dialog result: ${result}`);
-          this.router.navigate(['/']);
-        });
-        if (this.formService.Form1.get('$key').value == null){
-          this.formService.insertUser(this.formService.Form1.value);
+        if (this.formService.Form1.get('sectionA').valid){
+          if (this.formService.Form1.get('sectionB').valid){
+            if (this.formService.Form1.get('sectionC').valid){
+
+              if (this.formService.Form1.get('$key').value == null){
+                const dialogRef = this.dialog.open(SubmitMsgComponent);
+                dialogRef.afterClosed().subscribe((result) => {
+                  if (result == true){
+                    this.formService.insertUser(this.formService.Form1.value);
+                    this.router.navigate(['/']);
+                  }
+                });
+              }else {
+                const dialogRef = this.dialog.open(UpdateMsgComponent);
+                dialogRef.afterClosed().subscribe((result) => {
+                  if (result == true){
+                    this.formService.updateUser(this.formService.Form1.value);
+                    this.router.navigate(['/']);
+                  }
+                });
+              }
+
+            }else{
+             this.dialog.open(FailureMsgComponent);
+              this.step = 3;
+            }
+          }else{
+            this.dialog.open(FailureMsgComponent);
+            this.step = 2;
+          }
+        }else{
+          this.dialog.open(FailureMsgComponent);
+          this.step = 1;
         }
-        else {
-          this.formService.updateUser(this.formService.Form1.value);
-        }
+
+
+
         //console.log(this.formService.Form1.value);
 
       }
       else{
-        const dialogRef = this.dialog.open(FailureMsgComponent);
-
-          dialogRef.afterClosed().subscribe(result => {
-            // console.log(`Dialog result: ${result}`);
-          });
-      // console.log(this.formService.Form1.value);
+        this.dialog.open(FailureMsgComponent);
       }
     }
   }

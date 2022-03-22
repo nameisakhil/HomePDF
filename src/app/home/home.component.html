@@ -12,7 +12,7 @@
       <div class="card">
       <div *ngFor = "let form of formArray" class="card card-body">
         <div class="edit-btn-container">
-        <p>Patient name: <span>{{form.sectionA.patientname}} <button class="btn-sm plus-btn"
+        <p *ngIf="form.sectionA.patientname">Patient name: <span>{{form.sectionA.patientname}} <button class="btn-sm plus-btn"
           data-toggle="tooltip" data-placement="left" title="Click to expand/collapse data"
           (click)="form.expand = !form.expand">
           <i [ngClass]="form.expand ? 'fa fa-minus':'fa fa-plus'"></i></button></span> </p>
@@ -36,7 +36,7 @@
           <p>History of genetic/medical disease:<span> {{form.sectionC.geneticHistory}}</span></p>
           <p>Doctor name:<span> {{form.sectionC.doctorName}}</span></p>
           <p>Date on which consent of person was obtained in form-G:<span> {{form.sectionC.pregnantWomanConsentDate | date}}</span></p>
-          <p>Date of the procedure was completed:<span> {{form.sectionD.date4}}</span></p>
+          <p>Date of the procedure was completed:<span> {{form.sectionD.date4 | date}}</span></p>
           <h6>Personal Details</h6>
           <p>Name:<span>{{form.sectionD.name}}</span></p>
           <p>Age:<span> {{form.sectionD.age}}</span></p>
@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-  </div>
+   </div>
   </div>
 </div>
 

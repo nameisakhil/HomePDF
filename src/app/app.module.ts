@@ -28,6 +28,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { SubmitMsgComponent } from './submit-msg/submit-msg.component'
 import { FormService } from './shared/form.service';
+import { UpdateMsgComponent } from './update-msg/update-msg.component';
+import { DeleteMsgComponent } from './delete-msg/delete-msg.component';
 
 
 
@@ -40,6 +42,8 @@ import { FormService } from './shared/form.service';
     SuccessMsgComponent,
     FailureMsgComponent,
     SubmitMsgComponent,
+    UpdateMsgComponent,
+    DeleteMsgComponent,
   ],
   imports: [
     BrowserModule,

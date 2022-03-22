@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DeleteMsgComponent } from '../delete-msg/delete-msg.component';
 import { FormService } from '../shared/form.service';
 
 @Component({
@@ -14,7 +16,7 @@ export class HomeComponent implements OnInit {
   formArray = [];
 
 
-  constructor(public formService:FormService,private router:Router) { }
+  constructor(public formService:FormService,private router:Router, private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.formService.getFormList().subscribe(
@@ -32,9 +34,13 @@ export class HomeComponent implements OnInit {
   }
 
   onDelete($key){
-    if (window.confirm('Are you sure to delete this record?')){
-      this.formService.deleteUser($key);
-    }
+    const dialogRef = this.dialog.open(DeleteMsgComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == true){
+        this.formService.deleteUser($key);
+      }
+    });
+
   }
 
   onClickForm(){

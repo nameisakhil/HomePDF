@@ -114,7 +114,15 @@ export class FormService {
             'recommendedAditionalTestsOthersDetail': new FormControl(null)
 
 
-          })
+          }),
+          'resultsOfTheProcedures': new FormControl(null),
+            'proceduresCariedoutDate': new FormControl(null),
+            'preNatalCOnveyedTo': new FormControl(null),
+            'preNatalCOnveyedOn':new FormControl(null),
+            'MTPIndiaction':new FormControl(null),
+            'dateFIlled': new FormControl(null),
+            'place':new FormControl(null)
+
 
       }),
     sectionD: new FormGroup({
@@ -243,6 +251,13 @@ export class FormService {
             'preImplantationGenderDiagnosis':user.sectionC.recommendedAditionalTests.preImplantationGenderDiagnosis ,
             'recommendedAditionalTestsOthersDetail': user.sectionC.recommendedAditionalTests.recommendedAditionalTestsOthersDetail,
           }),
+          'resultsOfTheProcedures': user.sectionC.resultsOfTheProcedures,
+            'proceduresCariedoutDate': user.sectionC.proceduresCariedoutDate,
+            'preNatalCOnveyedTo': user.sectionC.preNatalCOnveyedTo,
+            'preNatalCOnveyedOn':user.sectionC.preNatalCOnveyedOn,
+            'MTPIndiaction':user.sectionC.MTPIndiaction,
+            'dateFIlled': user.sectionC.dateFIlled,
+            'place':user.sectionC.place
 
       }),
       'sectionD':({
@@ -365,6 +380,13 @@ export class FormService {
             'preImplantationGenderDiagnosis':user.sectionC.recommendedAditionalTests.preImplantationGenderDiagnosis ,
             'recommendedAditionalTestsOthersDetail': user.sectionC.recommendedAditionalTests.recommendedAditionalTestsOthersDetail,
           }),
+          'resultsOfTheProcedures': user.sectionC.resultsOfTheProcedures,
+          'proceduresCariedoutDate': user.sectionC.proceduresCariedoutDate,
+          'preNatalCOnveyedTo': user.sectionC.preNatalCOnveyedTo,
+          'preNatalCOnveyedOn':user.sectionC.preNatalCOnveyedOn,
+          'MTPIndiaction':user.sectionC.MTPIndiaction,
+          'dateFIlled': user.sectionC.dateFIlled,
+          'place':user.sectionC.place
 
       }),
       'sectionD':({

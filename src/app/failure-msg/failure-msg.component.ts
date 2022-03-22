@@ -12,4 +12,5 @@ export class FailureMsgComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
 }

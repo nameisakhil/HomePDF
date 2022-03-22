@@ -12,4 +12,5 @@ export class SuccessMsgComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
 }

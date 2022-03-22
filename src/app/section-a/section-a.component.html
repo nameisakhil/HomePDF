@@ -3,23 +3,23 @@
   <div class="row">
     <div class="col-md-12">
       <div class="text-center">
-      <h2>FORM-F</h2>
+      <h2 routerLink="/">FORM-F</h2>
       <p>[See provison to Section 4(3), rule 9(4) and rule 10(1A)]</p>
       <p>(New amended on 4th February, 2014 notified on 31st January 2014)</p>
       <p><strong>FOR MAINTENANCE OF RECORD IN CASE OF PRENATAL DIAGNOSTIC TEST / PROCEDURE BY GENETIC CLINIC / ULTRASOUND CLINIC / IMAGING CENTRE</strong></p>
        <div class="btn-container">
       <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [formControl]="fontStyleControl">
         <!--Adding routerlinkactive to each button for button active-->
-        <mat-button-toggle [disabled]="step !== 1" value="sectionA" [ngClass]="{'active':step == 1}">Section A</mat-button-toggle>
-        <mat-button-toggle value="sectionB" [disabled]="step !== 2" [ngClass]="{'active':step == 2}">Section B</mat-button-toggle>
-        <mat-button-toggle value="sectionC" [disabled]="step !== 3" [ngClass]="{'active':step == 3}">Section C</mat-button-toggle>
-        <mat-button-toggle value="sectionD" [disabled]="step !== 4" [ngClass]="{'active':step == 4}">Section D</mat-button-toggle>
+        <mat-button-toggle value="sectionA" [ngClass]="{'active':step == 1}" (click)="gotSec1()">Section A</mat-button-toggle>
+        <mat-button-toggle value="sectionB" [ngClass]="{'active':step == 2}" (click)="gotSec2()">Section B</mat-button-toggle>
+        <mat-button-toggle value="sectionC" [ngClass]="{'active':step == 3}" (click)="gotSec3()">Section C</mat-button-toggle>
+        <mat-button-toggle value="sectionD" [ngClass]="{'active':step == 4}" (click)="gotSec4()">Section D</mat-button-toggle>
       </mat-button-toggle-group>
       </div>
       </div>
       <form [formGroup]="this.formService.Form1" (ngSubmit)="onAdd()">
         <input type="hidden" formControlName='$key'>
-        <div formGroupName="sectionA" *ngIf="step == 1">
+        <div formGroupName="sectionA" *ngIf="step == 1" (ngSubmit)="gotoNext()">
         <p class="sub-head">Section A:To be filled in for all Diagnostic Procedures/Tests</p>
           <mat-form-field class="example-full-width" appearance="fill" >
             <mat-label >Name and complete address of Genetic Clinic/ Ultrasound Clinic/ Imaging Centre:</mat-label>
@@ -82,7 +82,7 @@
             <mat-label>Last menstrual period or weeks of pregnancy:</mat-label>
             <input matInput id="lastDate" formControlName="lastDate">
           </mat-form-field>
-          </div>
+        </div>
         <div formGroupName="sectionB" *ngIf="step == 2">
         <p class="sub-head">Section B: To be filled in for performing non-invasive diagnostic Procedures/Tests only</p>
         <mat-form-field class="example-full-width" appearance="fill">
@@ -281,6 +281,43 @@
             <input matInput value="" formControlName="recommendedAditionalTestsOthersDetail">
           </mat-form-field>
         </section>
+        <mat-form-field class="example-full-width width-100 margin-top" appearance="fill" >
+          <mat-label>Result of the Procedures/Tests carried out (report in brief of the invasive tests/procedures carried out)</mat-label>
+          <input matInput required value="" formControlName="resultsOfTheProcedures">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-100 margin-top">
+          <mat-label>Date on which procedures carried out:</mat-label>
+          <input matInput required type="date" formControlName='proceduresCariedoutDate' >
+        </mat-form-field>
+        <section>
+          <mat-form-field class="example-full-width width-100 margin-top" appearance="fill" >
+            <mat-label>The result of pre-natal diagnostic procedures was conveyed to</mat-label>
+            <input matInput required value="" formControlName="preNatalCOnveyedTo">
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="width-100 margin-top">
+            <mat-label>The result of pre-natal diagnostic procedures was conveyed on</mat-label>
+            <input matInput required type="date" formControlName='preNatalCOnveyedOn' >
+         </mat-form-field>
+        </section>
+        <mat-form-field class="example-full-width width-100 margin-top" appearance="fill" >
+          <mat-label>Any indication for MTP as per the abnormality detected in the diagnostic procedures/tests</mat-label>
+          <input matInput required value="" formControlName="MTPIndiaction">
+        </mat-form-field>
+        <section>
+          <div class="signature-container">
+            <section>
+              <mat-form-field appearance="fill" class="width-40 margin-top block">
+                <mat-label>Date</mat-label>
+                <input matInput required type="date" formControlName='dateFIlled' >
+              </mat-form-field>
+              <mat-form-field class="example-full-width width-40 margin-top" appearance="fill" >
+                <mat-label>Place</mat-label>
+                <input matInput required value="" formControlName="place">
+              </mat-form-field>
+            </section>
+          </div>
+        </section>
+
         </div>
         <div formGroupName="sectionD" *ngIf="step == 4">
           <p class="sub-head">SECTION D: Declaration
@@ -294,14 +331,14 @@
             </mat-form-field>
             declare that by undergoing
             <mat-form-field  appearance="fill">
-              <input matInput required placeholder="" formControlName="diagnosis">
+              <input matInput placeholder="" formControlName="diagnosis">
             </mat-form-field>
             Pre-Natal diagnostic test/procedure. I do not want to know the sex of my foetus.
             <br>
             <div class="signature-container">
               <mat-form-field appearance="fill">
                 <mat-label>Choose a date</mat-label>
-                <input matInput required type="date" formControlName="date1">
+                <input matInput type="date" formControlName="date1">
               </mat-form-field>
 
             </div>
@@ -378,9 +415,10 @@
         </div>
         <div class="footer-btn-container">
           <button type="button" class="btn btn-dark button" (click)="gotoPrevious()" *ngIf="step != 1">Previous</button>
-          <button type="submit" class="btn btn-dark button" *ngIf="step != 4">Next</button>
-          <button type="submit" class="btn btn-dark button" *ngIf="step == 4">Submit</button>
+          <button type="button" class="btn btn-dark button" (click)="gotoNext()" *ngIf="step != 4" >Next</button>
+          <button type="submit" class="btn btn-dark button" *ngIf="step == 4 && this.formService.Form1.get('$key').value == null">Submit</button>
           <button class="btn btn-dark" type="button" (click)="onClickReset()">Reset</button>
+          <button type="submit" class="btn btn-dark button" *ngIf="this.formService.Form1.get('$key').value !== null"> Save</button>
         </div>
      </form>
      </div>
