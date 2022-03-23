@@ -225,7 +225,7 @@ ul {
 .width-40{
   width: 630px;
 }
-.signature-box {
+/* .signature-box {
   border-style: dashed;
   border-width: 1px;
   margin-bottom: 20px;
@@ -234,12 +234,12 @@ ul {
   text-align: end;
   width: 30vw;
   padding-top: 70px;
-}
-.signature-container {
+} */
+/* .signature-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+} */
 
 button {
   margin-right: 20px;
@@ -281,4 +281,18 @@ h2 {
 }
 .color{
   color: red;
+}
+
+
+.display-none{
+  display: none;
+}
+
+.width-inline{
+  width: 15vw;
+}
+
+#pdfContentSectionC li, #pdfContentSectionB li{
+  list-style-type: decimal;
+  margin-right: 8px;
 }

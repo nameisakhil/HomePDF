@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { FormControl,FormArray} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessMsgComponent } from '../success-msg/success-msg.component';
@@ -8,7 +8,7 @@ import { FormService } from '../shared/form.service';
 import { SubmitMsgComponent } from '../submit-msg/submit-msg.component';
 import { Router } from '@angular/router';
 import { UpdateMsgComponent } from '../update-msg/update-msg.component';
-
+import {jsPDF} from 'jspdf'
 
 
 interface gender {
@@ -22,8 +22,13 @@ interface gender {
   styleUrls: ['./section-a.component.css']
 })
 export class SectionAComponent implements OnInit {
-
+  @ViewChild("pdfContentSectionA",{static:false}) elA!: ElementRef
+  @ViewChild("pdfContentSectionB",{static:false}) elB!: ElementRef
+  @ViewChild("pdfContentSectionC",{static:false}) elC!: ElementRef
+  @ViewChild("pdfContentSectionD",{static:false}) elD!: ElementRef
   step :any = 1;
+  arrayBool:boolean= false
+  ultraBool:boolean = false
 
   form1 = this.formService.Form1.controls;
   fontStyleControl = new FormControl();
@@ -253,5 +258,103 @@ export class SectionAComponent implements OnInit {
   savePad() {
     const base64Data = this.signaturePad.toDataURL();
     this.signatureImg = base64Data;
+  }
+
+  generatePDFSectionA(){
+    if (this.formService.Form1.get("sectionA").valid){
+      let pdf = new jsPDF('p','pt','a4')
+
+      pdf.html(this.elA.nativeElement,{
+        callback: (pdf) =>{
+          pdf.deletePage(2);
+          pdf.save("sectionA.pdf")
+          this.formService.Form1.reset()
+          this.step = 2
+        },
+        margin:20
+      })
+
+
+    }
+    else{
+      const dialogRef = this.dialog.open(FailureMsgComponent);
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+     console.log(this.formService.Form1.value);
+    }
+  }
+  generatePDFSectionB(){
+    if (this.formService.Form1.get('sectionB').valid){
+      let pdf = new jsPDF('p','pt','a4')
+
+      pdf.html(this.elB.nativeElement,{
+        callback: (pdf) =>{
+          pdf.deletePage(2);
+          pdf.save("sectionB.pdf")
+          this.formService.Form1.get('sectionB').reset()
+          this.step = 3
+        },
+        margin:20
+      })
+    }
+    else{
+      const dialogRef = this.dialog.open(FailureMsgComponent);
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+     console.log(this.formService.Form1.get('sectionB').value);
+    }
+
+  }
+
+  generatePDFSectionC(){
+    if (this.formService.Form1.get('sectionC').valid){
+      let pdf = new jsPDF('p','pt','a4')
+
+      pdf.html(this.elC.nativeElement,{
+        callback: (pdf) =>{
+          pdf.deletePage(2);
+          pdf.save("sectionC.pdf")
+          this.formService.Form1.get('sectionC').reset()
+          this.step= 4
+        },
+        margin:20
+      })
+    }
+    else{
+      const dialogRef = this.dialog.open(FailureMsgComponent);
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+     console.log(this.formService.Form1.get('sectionC').value);
+    }
+
+  }
+  generatePDFSectionD(){
+    if (this.formService.Form1.get('sectionD').valid){
+      let pdf = new jsPDF('p','pt','a4')
+      // let pageCount = pdf.internal.getNumberOfPages();
+
+      pdf.html(this.elD.nativeElement,{
+        callback: (pdf) =>{
+          pdf.deletePage(2);
+          pdf.save("sectionD.pdf")
+        },
+        margin:20
+      })
+    }
+    else{
+      const dialogRef = this.dialog.open(FailureMsgComponent);
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+     console.log(this.formService.Form1.get('sectionD').value);
+    }
+
   }
 }

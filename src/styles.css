@@ -10,3 +10,83 @@
 h2 {
   cursor: pointer;
 }
+
+.italic{
+  font-style: italic;
+  font-weight: 600;
+}
+
+.bold{
+  font-weight: 900;
+}
+
+.text-decoration{
+  /* text-decoration: underline; */
+  border-bottom: #000000 2px solid;
+  margin-left:7px;
+  min-width: 50px;
+}
+
+
+.main-text-decoration{
+  border-bottom: #000000 2px solid;
+  margin-left: 0px;
+}
+
+
+#pdfContentSectionA, #pdfContentSectionB, #pdfContentSectionC, #pdfContentSectionD{
+  width:595px;
+  height: 842px;
+  padding: 10px;
+  font-size: 12px;
+  line-height: inherit;
+  page-break-after: always;
+}
+
+p{
+  margin-bottom: 5px;
+}
+
+.fonts{
+  font-size: 18px !important;
+  margin-bottom: 4px;
+  padding: 0px;
+  font-weight: 900;
+}
+
+
+.visibility-none{
+  display: none;
+}
+
+.signature-box {
+  border-style: dashed;
+  border-width: 1px;
+  /* margin-bottom: 20px; */
+  background-color: #fdf8f6;
+  padding: 10px;
+  text-align: end;
+  width: 300px;
+  padding-top: 50px;
+  /* width: 350px */
+}
+.signature-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrap{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.inline{
+  display: inline;
+}
+
+.margin-left-inline{
+  margin-left: 10px;
+}
