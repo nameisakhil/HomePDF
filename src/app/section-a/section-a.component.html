@@ -619,7 +619,7 @@
                 || this.formService.Form1.get('sectionB').value.checkBoxs['Observation of intra-partum events'] !== false
                 || this.formService.Form1.get('sectionB').value.checkBoxs['Medical or surgical conditions complicating pregnancy'] !== false
                 || this.formService.Form1.get('sectionB').value.checkBoxs['Research OR scientific studies in recognized institutions'] !== false ; else checkboxEmpty
-                " class="wrap">
+                " class="wrap decimal-type">
                 <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['To diagnose intra-uterine and or ectopic pregnancy and confirm viability']" class="margin-left-inline">
                   <i class="fa-solid fa-check"></i> <span class="bold">To diagnose intra-uterine and or ectopic pregnancy and confirm viability</span>
                 </li>
@@ -817,7 +817,7 @@
                 <p>
                   19. Indication/s for the diagnosis procedure (“Tick” on appropriate indication/s):
                 </p>
-                <ul>
+                <ul class="decimal-type">
                   <li class="inline">
                     Previous child/children with:
                   </li>
@@ -918,7 +918,7 @@
                   || this.formService.Form1.get('sectionC').value.invasiveProcedures.Cordocentesis !== false
                   || this.formService.Form1.get('sectionC').value.invasiveProcedures.invasiveProceduresOthers !== false
                   ; else invasiveProcedureEmpty
-                " class="wrap">
+                " class="wrap decimal-type" >
                   <li *ngIf="this.formService.Form1.get('sectionC').value.invasiveProcedures.amniocentesis">
                     <i class="fa-solid fa-check"></i>
                     <span class="bold">
@@ -969,7 +969,7 @@
                   || this.formService.Form1.get('sectionC').value.recommendedAditionalTests.preImplantationGenderDiagnosis !== false
                   || this.formService.Form1.get('sectionC').value.recommendedAditionalTests.recommendedAditionalTestsOthers !== false
                   ; else recommendedAditionalTestsEmpty
-                " class="wrap">
+                " class="wrap decimal-type">
                   <li  *ngIf="this.formService.Form1.get('sectionC').value.recommendedAditionalTests.chromosomalStudies">
                     <i class="fa-solid fa-check"></i>
                     <span class="bold">Chromosomal studies</span>

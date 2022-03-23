@@ -292,7 +292,7 @@ h2 {
   width: 15vw;
 }
 
-#pdfContentSectionC li, #pdfContentSectionB li{
+.decimal-type li{
   list-style-type: decimal;
   margin-right: 8px;
 }
