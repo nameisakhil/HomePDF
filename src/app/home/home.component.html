@@ -20,6 +20,7 @@
           <div class="media-large d-none d-md-block">
             <button class="btn btn-outline-primary btn-sm" (click)="formService.populateForm(form)">Update</button>
             <button class="btn btn-outline-danger btn-sm" (click)="onDelete(form.$key)">Delete</button>
+            <button class="btn btn-outline-dark btn-sm" (click)="generatePDF(form)">Generate PDF</button>
           </div>
           <div class="media-small d-md-none">
             <button class="edit btn-sm" (click)="formService.populateForm(form)"><i class="fa fa-pencil"></i></button>
@@ -43,6 +44,737 @@
           <p>Gender:<span> {{form.sectionD.gender}}</span></p>
           <p>Contact number:<span> {{form.sectionD.contactNumber}}</span></p>
          <p>Relation name:<span> {{form.sectionA.otherName}}</span></p>
+        </div>
+      </div>
+
+      <div class="visibility-none">
+        <div class="row" id="pdfContent" #pdfContent>
+          <div>
+            <div class="visibility">
+              <div class="row" id="pdfContentSectionA" #pdfContentSectionA>
+                <div>
+                  <p class="bold fonts">SECTION A: To be filled in for all Diagnostic Procedures/Tests</p>
+                  <p>
+                    1. Name and complete address of Genetic Clinic/Ultrasound Clinic/Imaging Centre: &emsp;
+                    <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.nameandAddress !== null; else nameandAddressEmpty">{{this.formService.Form1.get('sectionA').value.nameandAddress}}</span>
+                    <ng-template #nameandAddressEmpty>
+                      ________________
+                    </ng-template>
+                  </p>
+                  <p>
+                    2. Registration No. (Under PC&PNDT Act, 1994): &emsp;
+                    <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.regdNo !== null; else regdNoEmpty">{{this.formService.Form1.get('sectionA').value.regdNo}}</span>
+                    <ng-template #regdNoEmpty>
+                      ________________
+                    </ng-template>
+                  </p>
+                  <p>
+                    3. Patient's name: &emsp;
+                    <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.patientname !== null; else patientnameEmpty">{{this.formService.Form1.get('sectionA').value.patientname}}</span>
+                    Age: &emsp; <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.age !== null; else ageEmpty">{{this.formService.Form1.get('sectionA').value.age}}</span>
+                    <ng-template #patientnameEmpty>
+                      ________________
+                    </ng-template>
+                    <ng-template #ageEmpty>
+                      ________________
+                    </ng-template>
+                  </p>
+
+                  <div>
+                    <p>
+                      4. Total Number of living children: &emsp;
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.noOfChildren !== null; else noOfChildrenEmpty">{{this.formService.Form1.get('sectionA').value.childrenGroup.noOfChildren}}</span>
+                      <ng-template #noOfChildrenEmpty>
+                        ________________
+                      </ng-template>
+                    </p>
+                    <ul>
+                      <li>
+                        a) Number of living Sons with age of each living son (in years or months): &emsp;
+                        <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.childrenGroup.livingSons !== null; else livingSonsEmpty" >{{this.formService.Form1.get('sectionA').value.childrenGroup.livingSons}}</span>
+                        <ng-template #livingSonsEmpty>
+                          ________________
+                        </ng-template>
+                      </li>
+                      <li>
+                        b) Number of living Daughters with age of each living daughter (in years or months) : &emsp;
+                        <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.childrenGroup.livingDaughters !== null; else livingDaughtersEmpty">{{this.formService.Form1.get('sectionA').value.childrenGroup.livingDaughters}}</span>
+                        <ng-template #livingDaughtersEmpty>
+                          ________________
+                        </ng-template>
+                      </li>
+                    </ul>
+                  </div>
+                  <p>
+                    5. Husband's/Wife's/Father's/Mother's Name: &emsp;
+                    <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.otherName !== null; else otherNameEmpty">{{this.formService.Form1.get('sectionA').value.otherName}}</span>
+                    <ng-template #otherNameEmpty>
+                      ________________
+                    </ng-template>
+                  </p>
+                  <p>
+                    6. Full postal address of the patient with Contact Number,if any: &emsp;
+                    <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.postalAddress !== null; else postalAddressEmpty">{{this.formService.Form1.get('sectionA').value.postalAddress}}</span>
+                    <ng-template #postalAddressEmpty>
+                      ________________
+                    </ng-template>
+                  </p>
+                  <div>
+                    <p>
+                      7. (a) Referred by (Full name and address of Doctor(s)/ Genetic Counselling Centre) :
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.referredBy !== null; else referredByEmpty">{{this.formService.Form1.get('sectionA').value.referral.referredBy}}</span>
+                      <ng-template #referredByEmpty>
+                        ________________
+                      </ng-template>
+                      <br>
+                      &emsp; (Referral slips to be preserved carefully with Form F)
+                    </p>
+
+                    <p>
+                      (b). <span class="bold" > Self-Referral </span> by Gynaecologists/Radiologists/Registered Medical Practitioner conducting the diagnostic procedures:
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.referral.selfReferral !== null; else selfReferralEmpty">{{this.formService.Form1.get('sectionA').value.referral.selfReferral}}</span>
+                      <ng-template #selfReferralEmpty>
+                        ________________
+                      </ng-template>
+
+                      <br>
+                      (Referral note with indications and case papers of the patient to be preserved with Form F)
+                      <br>
+                      <span class="bold">
+                        (Self-referral does not mean a client coming to a clinic and requesting for the test or the relative/s
+                        requesting for the test of a pregnant woman)
+                      </span>
+                    </p>
+                    <p>
+                      8. Last menstrual period or weeks of pregnancy:
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionA').value.lastDate !== null; else lastDateEmpty">{{this.formService.Form1.get('sectionA').value.lastDate}}</span>
+                      <ng-template #lastDateEmpty>
+                        ________________
+                      </ng-template>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="visibility">
+              <div class="row" id="pdfContentSectionB" #pdfContentSectionB>
+                <div>
+                  <p class="bold">
+                    SECTION B: To be filled in for performing non-invasive diagnostic Procedures/Tests only
+                  </p>
+                  <div>
+                    <p>9. Name of the doctor performing the procedure/s:
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionB').value.docter_name !== null; else docter_name_empty">{{this.formService.Form1.get('sectionB').value.docter_name}}</span>
+                      <ng-template #docter_name_empty>
+                        ______________
+                      </ng-template>
+                    </p>
+                    <p>10. Indication/s for diagnosis procedure
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionB').value.indications !== null; else indicationsEmpty">{{this.formService.Form1.get('sectionB').value.indications}}</span>
+                      <ng-template #indicationsEmpty>
+                        ______________
+                      </ng-template>
+                      <br>
+                      (specify with reference to the request made in the referral slip or in a self-referral note)
+                    </p>
+                    <p class="inline">
+                      Put a “Tick” against the appropriate indication/s for ultrasound:
+                    </p>
+                    <ul *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['To diagnose intra-uterine and or ectopic pregnancy and confirm viability'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Estimation of gestational age (dating)'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Vaginal bleeding OR leaking'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Suspected pregnancy with IUCD in-situ or suspected pregnancy following contraceptive failure OR MTP failure'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Follow-up of cases of abortion'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Assessment of cervical canal and diameter of internal os'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Discrepancy between uterine size and period of amenorrhea'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Any suspected adenexal or uterine pathology OR abnormality'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Detection of chromosomal abnormalities, fetal structural defects and other abnormalities and their follow-up'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['To evaluate fetal presentation and position'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Assessment of liquor amnii'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Preterm labor OR preterm premature rupture of membranes'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Evaluation of placental position, thickness, grading and abnormalities (placenta praevia, retro placental haemorrhage, abnormal adherence etc'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Evaluation of umbilical cord presentation, insertion, nuchal encirclement, number of vessels and presence of true knot'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Evaluation of previous Caesarean Section scars'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Evaluation of fetal growth parameters, fetal weight and fetal well being'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Color flow mapping and duplex Doppler studies'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Ultrasound guided procedures such as medical termination of pregnancy, external cephalic version etc and their follow-up'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Adjunct to diagnostic and therapeutic invasive interventions such as chorionic villus sampling (CVS),amniocenteses, feel blood sampling, fetal skin biopsy, amnio-infusion, intrauterine infusion, placement of shunts etc'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Observation of intra-partum events'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Medical or surgical conditions complicating pregnancy'] !== false
+                      || this.formService.Form1.get('sectionB').value.checkBoxs['Research OR scientific studies in recognized institutions'] !== false ; else checkboxEmpty
+                      " class="wrap decimal-type">
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['To diagnose intra-uterine and or ectopic pregnancy and confirm viability']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">To diagnose intra-uterine and or ectopic pregnancy and confirm viability</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Estimation of gestational age (dating)']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Estimation of gestational age (dating)</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Vaginal bleeding OR leaking']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Vaginal bleeding OR leaking</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Suspected pregnancy with IUCD in-situ or suspected pregnancy following contraceptive failure OR MTP failure']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Suspected pregnancy with IUCD in-situ or suspected pregnancy following contraceptive failure OR MTP failure</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Follow-up of cases of abortion']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Follow-up of cases of abortion</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Assessment of cervical canal and diameter of internal os']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Assessment of cervical canal and diameter of internal os</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Discrepancy between uterine size and period of amenorrhea']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Discrepancy between uterine size and period of amenorrhea</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Any suspected adenexal or uterine pathology OR abnormality']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Any suspected adenexal or uterine pathology OR abnormality</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Detection of chromosomal abnormalities, fetal structural defects and other abnormalities and their follow-up']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Detection of chromosomal abnormalities, fetal structural defects and other abnormalities and their follow-up</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['To evaluate fetal presentation and position']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">To evaluate fetal presentation and position</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Assessment of liquor amnii']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Assessment of liquor amnii</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Preterm labor OR preterm premature rupture of membranes']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Preterm labor OR preterm premature rupture of membranes</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Evaluation of placental position, thickness, grading and abnormalities (placenta praevia, retro placental haemorrhage, abnormal adherence etc']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Evaluation of placental position, thickness, grading and abnormalities (placenta praevia, retro placental haemorrhage, abnormal adherence etc</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Evaluation of umbilical cord presentation, insertion, nuchal encirclement, number of vessels and presence of true knot']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Evaluation of umbilical cord presentation, insertion, nuchal encirclement, number of vessels and presence of true knot</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Evaluation of previous Caesarean Section scars']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Evaluation of previous Caesarean Section scars</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Evaluation of fetal growth parameters, fetal weight and fetal well being']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Evaluation of fetal growth parameters, fetal weight and fetal well being</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Color flow mapping and duplex Doppler studies']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Color flow mapping and duplex Doppler studies</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Ultrasound guided procedures such as medical termination of pregnancy, external cephalic version etc and their follow-up']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Ultrasound guided procedures such as medical termination of pregnancy, external cephalic version etc and their follow-up</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Adjunct to diagnostic and therapeutic invasive interventions such as chorionic villus sampling (CVS),amniocenteses, feel blood sampling, fetal skin biopsy, amnio-infusion, intrauterine infusion, placement of shunts etc']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Adjunct to diagnostic and therapeutic invasive interventions such as chorionic villus sampling (CVS),amniocenteses, feel blood sampling, fetal skin biopsy, amnio-infusion, intrauterine infusion, placement of shunts etc</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Observation of intra-partum events']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Observation of intra-partum events</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Medical or surgical conditions complicating pregnancy']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Medical or surgical conditions complicating pregnancy</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.checkBoxs['Research OR scientific studies in recognized institutions']" class="margin-left-inline">
+                        <i class="fa-solid fa-check"></i><span class="bold">Research OR scientific studies in recognized institutions</span>
+                      </li>
+                    </ul>
+                    <ng-template #checkboxEmpty>
+                      ______________
+                    </ng-template>
+                    <br>
+                    <p class="inline">
+                      11. Procedures carried out (Non-Invasive) (Put a “Tick” on the appropriate procedure):
+                    </p>
+                    <ul *ngIf=" this.formService.Form1.get('sectionB').get('procedure') !== null || this.formService.Form1.get('sectionB').value.otherProcedure[0] !== null; else proceduresEmpty">
+                      <li *ngIf="this.formService.Form1.get('sectionB').get('procedure') !== null">
+                        <i class="fa-solid fa-check"></i> <span class="bold">Ultrasound</span>
+                      </li>
+                      <li *ngIf="this.formService.Form1.get('sectionB').value.otherProcedure[0] !== null">
+                        <i class="fa-solid fa-check"></i> Any other (specify) <span class="bold">{{this.formService.Form1.get('sectionB').value.otherProcedure[0]}}</span>
+                      </li>
+                    </ul>
+                    <ng-template #proceduresEmpty>
+                      ______________
+                    </ng-template>
+                    <br>
+                    <p>
+                      12. Date on which declaration of pregnant woman/person was obtained:- <span class="bold " *ngIf="this.formService.Form1.get('sectionB').value.dateOfDeclaration !== null; else dateOfDeclarationEmpty">
+                        {{this.formService.Form1.get('sectionB').value.dateOfDeclaration}}</span>
+                        <ng-template #dateOfDeclarationEmpty>
+                          ______________
+                        </ng-template>
+                    </p>
+                    <p>
+                      13. Date on which procedures carried out:<span class="bold" *ngIf="this.formService.Form1.get('sectionB').value.dateOfProcedure !== null; else dateOfProcedureEmpty">{{this.formService.Form1.get('sectionB').value.dateOfProcedure}}</span>
+                      <ng-template #dateOfProcedureEmpty>
+                        ______________
+                      </ng-template>
+                    </p>
+                    <p>
+                      14. Result of the non-invasive procedure carried out (report in brief of the test including ultrasound carried out):
+                       <span class="bold" *ngIf="this.formService.Form1.get('sectionB').value.resultOfProcedure !== null; else resultOfProcedureEmpty" >{{this.formService.Form1.get('sectionB').value.resultOfProcedure}}</span>
+                       <ng-template #resultOfProcedureEmpty>
+                        ______________
+                       </ng-template>
+                      </p>
+                    <p>
+                      15. The result of pre-natal diagnostic procedures was conveyed to
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionB').value.resultConveyedTo !== null; else resultConveyedToEmpty" >{{this.formService.Form1.get('sectionB').value.resultConveyedTo}}</span>
+                      <ng-template #resultConveyedToEmpty>
+                        ______________
+                      </ng-template>
+                      on
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionB').value.resultConveyedOn !== null; else resultConveyedOnEmpty">{{this.formService.Form1.get('sectionB').value.resultConveyedOn}}</span>
+                      <ng-template #resultConveyedOnEmpty>
+                        ______________
+                      </ng-template>
+                    </p>
+                    <p>
+                      16. Any indication for MTP as per the abnormality detected in the diagnostic procedures/tests:
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionB').value.indication !== null; else indicationEmpty">{{this.formService.Form1.get('sectionB').value.indication}}</span>
+                      <ng-template #indicationEmpty>
+                        ______________
+                      </ng-template>
+                    </p>
+                    <div class="signature-container">
+                      <div>
+                        <p>
+                          Date: <span class="bold" *ngIf="this.formService.Form1.get('sectionB').value.date !== null; else dateEmpty">{{this.formService.Form1.get('sectionB').value.date}}</span>
+                          <ng-template #dateEmpty>
+                            ______________
+                          </ng-template>
+                        </p>
+                        <p>
+                          Place: <span class="bold" *ngIf="this.formService.Form1.get('sectionB').value.place !== null; else placeEmpty" >{{this.formService.Form1.get('sectionB').value.place}}</span>
+                          <ng-template #placeEmpty>
+                            ______________
+                          </ng-template>
+                        </p>
+                      </div>
+                      <div>
+                        <p class="signature-box block" id="signature-box">
+
+                          Name, Signature and Registration Number with Seal of
+                          the Gynaecologist/Radiologist/Registered Medical
+                          Practitioner performing Diagnostic Procedure/s
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="visibility" >
+              <div class="row" id="pdfContentSectionC" #pdfContentSectionC>
+                <div>
+                  <p class="bold fonts">
+                    SECTION C : <span class="italic fonts"> To be filled for performing invasive Procedures/Tests only</span>
+                  </p>
+
+                  <section>
+                    <p>
+                      17. Name of the doctor/s performing the procedure/s:
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionC').value.doctorName !==null; else doctorNameEmpty ">{{this.formService.Form1.get('sectionC').value.doctorName}}</span>
+                      <ng-template #doctorNameEmpty>
+                        <span>____________________</span>
+                      </ng-template>
+                    </p>
+                    <p>
+                      18. (i) History of genetic/medical disease in the family (specify):
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionC').value.geneticDisease !==null; else geneticDisease">{{this.formService.Form1.get('sectionC').value.geneticDisease}}</span>
+                      <ng-template #geneticDisease>
+                        <span>____________________</span>
+                      </ng-template>
+                    </p>
+                    <p>
+                      18. (ii) History of genetic/medical disease on basis of
+                      diagnosis (“Tick” on appropriate basis of diagnosis):
+                      <span *ngIf="this.formService.Form1.get('sectionC').value.geneticHistory !== null; else geneticHistoryEmpty ">
+                        <span class="bold"
+                        *ngIf="this.formService.Form1.get('sectionC').value.geneticHistory !== 'others'; else otherDiagnosisHistory">
+                        {{this.formService.Form1.get('sectionC').value.geneticHistory}}
+                        </span>
+                        <ng-template #otherDiagnosisHistory> <span class="bold">{{this.formService.Form1.get('sectionC').value.otherDiagnosis}} </span> </ng-template>
+
+                      </span>
+                      <ng-template #geneticHistoryEmpty>
+                        <span>____________________</span>
+                      </ng-template>
+
+                    </p>
+                    <section>
+                      <p>
+                        19. Indication/s for the diagnosis procedure (“Tick” on appropriate indication/s):
+                      </p>
+                      <ul class="decimal-type">
+                        <li class="inline">
+                          Previous child/children with:
+                        </li>
+                        <span *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.chromosomalDisorders !== null
+                          || this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.metabolicDisorders !== null
+                          || this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.congenitalAnomaly !== null
+                          || this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.mentalDisability !== null
+                          || this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.Haemoglobinopathy !== null
+                          || this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.sexLinkedDisorders !== null
+                          || this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.singleGeneDisorder !== null
+                          || this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.previousChildOrChildrenWithOthers !== null
+                        ; else previousChildEmpty" class="wrap">
+                          <li *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.chromosomalDisorders" class="margin-left">
+                            <i class="fa-solid fa-check"></i><span class=" bold">  Chromosomal disorders </span>
+                          </li>
+                          <li *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.metabolicDisorders" class="margin-left">
+                            <i class="fa-solid fa-check"></i><span class=" bold">Metabolic disorders</span>
+                          </li>
+                          <li *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.congenitalAnomaly" class="margin-left">
+                            <i class="fa-solid fa-check"></i>
+                            <span class=" bold">
+                              Congenital anomaly
+                            </span>
+
+                          </li>
+                          <li *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.mentalDisability" class="margin-left">
+                            <i class="fa-solid fa-check"></i> <span class=" bold">Mental Disability</span>
+                          </li>
+                          <li *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.Haemoglobinopathy" class="margin-left">
+                            <i class="fa-solid fa-check"></i><span class=" bold">Haemoglobinopathy</span>
+                          </li>
+                          <li *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.sexLinkedDisorders" class="margin-left">
+                            <i class="fa-solid fa-check"></i><span class=" bold">Sex linked disorders</span>
+                          </li>
+                          <li *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.singleGeneDisorder" class="margin-left">
+                            <i class="fa-solid fa-check"></i><span class=" bold">Single gene disorder</span>
+                          </li>
+                          <li *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.previousChildOrChildrenWithOthers" class="margin-left">
+
+                            <span class="block"><i class="fa-solid fa-check"></i>Any Others:</span>
+                            <span class=" margin-left bold">
+                              {{this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.previousChildOrChildrenWithOthersDetail}}
+                            </span>
+                          </li>
+                        </span>
+                        <ng-template #previousChildEmpty>
+                          ____________________
+                        </ng-template>
+                      </ul>
+                      <ul>
+                        <li  *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.advancedMaternalAge">
+                          <span class="bold">Advanced maternal age (35 years)</span>
+                        </li>
+                      </ul>
+                      <ul>
+                        <li>
+                          <span class="">Mother/father/sibling has genetic disease:</span>
+                          <span class="bold margin-left" *ngIf="
+                            this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.mother !== null
+                            || this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.father !== null
+                            || this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.sibling !== null
+                            ; else geneticDiseaseEmpty
+                          ">
+                            <span *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.mother" class="block margin-left"><i class="fa-solid fa-check"></i> <span>Mother</span></span>
+                            <span *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.father" class="block margin-left"><i class="fa-solid fa-check"></i><span>Father</span></span>
+                            <span *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.sibling" class="block margin-left"><i class="fa-solid fa-check"></i><span>Sibling</span></span>
+                          </span>
+
+                          <ng-template #geneticDiseaseEmpty>
+                            ____________________
+                          </ng-template>
+                        </li>
+                      </ul>
+                      <ul>
+                        <li *ngIf="this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.diagnosisProcedureIndicationsOthers">
+                         <span class="block">
+                          Other (specify):
+                         </span>
+                         <span class="bold margin-left"> {{this.formService.Form1.get('sectionC').value.diagnosisProcedureIndications.diagnosisProcedureIndicationsOthersDetail}}</span>
+                        </li>
+                      </ul>
+
+                    </section>
+                    <p>
+                      20. Date on which consent of pregnant woman/person was obtained in Form G prescribed in PC&PNDT Act, 1994:
+                      <span class="bold" *ngIf="this.formService.Form1.get('sectionC').value.pregnantWomanConsentDate !== null; else pregnantWomanConsentDateEmpty">{{this.formService.Form1.get('sectionC').value.pregnantWomanConsentDate| date:'dd/MM/yyyy' }}</span>
+                      <ng-template #pregnantWomanConsentDateEmpty>
+                        _________________
+                      </ng-template>
+                    </p>
+                    <section>
+                      <p class="inline">
+                        21. Invasive procedures carried out (“Tick” on appropriate indication/s):
+                      </p>
+                      <ul *ngIf="this.formService.Form1.get('sectionC').value.invasiveProcedures.amniocentesis !== false
+                        || this.formService.Form1.get('sectionC').value.invasiveProcedures.chorionicVilliAspiration !== false
+                        || this.formService.Form1.get('sectionC').value.invasiveProcedures.fetalBiopsy !== false
+                        || this.formService.Form1.get('sectionC').value.invasiveProcedures.Cordocentesis !== false
+                        || this.formService.Form1.get('sectionC').value.invasiveProcedures.invasiveProceduresOthers !== false
+                        ; else invasiveProcedureEmpty
+                      " class="wrap decimal-type" >
+                        <li *ngIf="this.formService.Form1.get('sectionC').value.invasiveProcedures.amniocentesis">
+                          <i class="fa-solid fa-check"></i>
+                          <span class="bold">
+                            Amniocentesis
+                          </span>
+                        </li>
+                        <li *ngIf="this.formService.Form1.get('sectionC').value.invasiveProcedures.chorionicVilliAspiration" class="margin-left">
+                          <i class="fa-solid fa-check"></i>
+                          <span class="bold">
+                            Chorionic Villi aspiration
+                          </span>
+                        </li>
+                        <li *ngIf="this.formService.Form1.get('sectionC').value.invasiveProcedures.fetalBiopsy" class="margin-left">
+                          <i class="fa-solid fa-check"></i>
+                          <span class="bold">Fetal biopsy</span>
+                        </li>
+                        <li *ngIf="this.formService.Form1.get('sectionC').value.invasiveProcedures.Cordocentesis" class="margin-left">
+                          <i class="fa-solid fa-check"></i>
+                          <span class="bold">Cordocentesis</span>
+                        </li>
+                        <li *ngIf="this.formService.Form1.get('sectionC').value.invasiveProcedures.invasiveProceduresOthers" class="margin-left">Any other (specify):
+                          <span class="bold">{{this.formService.Form1.get('sectionC').value.invasiveProcedures.invasiveProceduresOthersDetail}}</span>
+                        </li>
+                      </ul>
+                      <ng-template #invasiveProcedureEmpty>
+                        ____________________
+                      </ng-template>
+                    </section>
+                    <section>
+                      <p >22. Any complication/s of invasive procedure (specify):
+                      <span class="bold"
+                        *ngIf="this.formService.Form1.get('sectionC').value.invasiveProcedureComplications !== null; else invasiveProcedureComplicationsEmpty"
+                      >{{this.formService.Form1.get('sectionC').value.invasiveProcedureComplications}}</span></p>
+
+                      <ng-template #invasiveProcedureComplicationsEmpty>
+                        _________________
+                      </ng-template>
+                    </section>
+                    <section>
+                      <p class="inline">
+                        23. Additional tests recommended (please mention if applicable):
+                      </p>
+
+                      <ul *ngIf = "
+                        this.formService.Form1.get('sectionC').value.recommendedAditionalTests.chromosomalStudies !== false
+                        || this.formService.Form1.get('sectionC').value.recommendedAditionalTests.biochemicalStudies !== false
+                        || this.formService.Form1.get('sectionC').value.recommendedAditionalTests.molecularStudies !== false
+                        || this.formService.Form1.get('sectionC').value.recommendedAditionalTests.preImplantationGenderDiagnosis !== false
+                        || this.formService.Form1.get('sectionC').value.recommendedAditionalTests.recommendedAditionalTestsOthers !== false
+                        ; else recommendedAditionalTestsEmpty
+                      " class="wrap decimal-type">
+                        <li  *ngIf="this.formService.Form1.get('sectionC').value.recommendedAditionalTests.chromosomalStudies">
+                          <i class="fa-solid fa-check"></i>
+                          <span class="bold">Chromosomal studies</span>
+                        </li>
+                        <li  *ngIf="this.formService.Form1.get('sectionC').value.recommendedAditionalTests.biochemicalStudies" class="margin-left">
+                          <i class="fa-solid fa-check"></i>
+                          <span class="bold">Biochemical studies</span>
+                        </li>
+                        <li *ngIf="this.formService.Form1.get('sectionC').value.recommendedAditionalTests.molecularStudies" class="margin-left">
+                          <i class="fa-solid fa-check"></i>
+                          <span class="bold">Molecular studies</span>
+                        </li>
+                        <li  *ngIf="this.formService.Form1.get('sectionC').value.recommendedAditionalTests.preImplantationGenderDiagnosis" class="margin-left">
+                          <i class="fa-solid fa-check"></i>
+                          <span class="bold">Pre-implantation gender diagnosis</span>
+                        </li>
+                        <li *ngIf="this.formService.Form1.get('sectionC').value.recommendedAditionalTests.recommendedAditionalTestsOthers" class="margin-left">
+                          Any other (specify): <span class="bold">{{this.formService.Form1.get('sectionC').value.recommendedAditionalTests.recommendedAditionalTestsOthersDetail}}</span>
+                        </li>
+                      </ul>
+                      <ng-template #recommendedAditionalTestsEmpty>
+                        _________________
+                      </ng-template>
+                    </section>
+                    <section>
+                      <p>24. Result of the Procedures/Tests carried out (report in brief of the invasive tests/procedures carried out):
+                        <span class="bold"
+                        *ngIf="this.formService.Form1.get('sectionC').value.resultsOfTheProcedures !== null ;
+                          else resultsOfTheProceduresEmpty
+                        "
+                        >{{this.formService.Form1.get('sectionC').value.resultsOfTheProcedures}}</span>
+                      </p>
+                      <ng-template #resultsOfTheProceduresEmpty>
+                        _________________
+                      </ng-template>
+                    </section>
+                    <section>
+                      <p>25. Date on which procedures carried out:
+                        <span class="bold" *ngIf="this.formService.Form1.get('sectionC').value.proceduresCariedoutDate !== null; else proceduresCariedoutDateEmpty">
+                          {{this.formService.Form1.get('sectionC').value.proceduresCariedoutDate | date:'dd/MM/yyyy'}}
+                        </span>
+                      </p>
+                      <ng-template #proceduresCariedoutDateEmpty>
+                        _________________
+                      </ng-template>
+                    </section>
+                    <section>
+                      <p>26. The result of pre-natal diagnostic procedures was conveyed to
+                        <span class="bold" *ngIf="this.formService.Form1.get('sectionC').value.preNatalCOnveyedTo !== '' else preNatalCOnveyedToEmpty">{{this.formService.Form1.get('sectionC').value.preNatalCOnveyedTo}}</span>
+                        <!-- <ng-template #blank1>____________________</ng-template> -->
+                        on
+
+                        <span class="bold" *ngIf="this.formService.Form1.get('sectionC').value.preNatalCOnveyedOn !== '' else preNatalCOnveyedOnEmpty">{{this.formService.Form1.get('sectionC').value.preNatalCOnveyedOn | date:'dd/MM/yyyy'}}</span></p>
+                        <!-- <ng-template #blank2>____________________</ng-template> -->
+                      <ng-template #preNatalCOnveyedToEmpty>
+                        _________________
+                      </ng-template>
+                      <ng-template #preNatalCOnveyedOnEmpty>
+                        _________________
+                      </ng-template>
+
+                    </section>
+                    <section>
+                      <p>27. Any indication for MTP as per the abnormality detected in the diagnostic procedures/tests:
+                        <span class="bold" *ngIf="this.formService.Form1.get('sectionC').value.MTPIndiaction !== null
+                        ; else MTPIndiactionEmpty
+                        ">{{this.formService.Form1.get('sectionC').value.MTPIndiaction}}</span>
+                      </p>
+                      <ng-template #MTPIndiactionEmpty>
+                        _________________
+                      </ng-template>
+                    </section>
+                    <div class="signature-container">
+                      <div>
+                        <p>
+                          Date:
+                          <span class="bold"
+                            *ngIf="this.formService.Form1.get('sectionC').value.dateFIlled !== null;
+                            else dateFIlledEmpty
+                          "
+                          >{{this.formService.Form1.get('sectionC').value.dateFIlled | date:'dd/MM/yyyy'}}</span>
+                        </p>
+                        <ng-template #dateFIlledEmpty>
+                          _________________
+                        </ng-template>
+                        <p>
+                          Place: <span class="bold"
+                          *ngIf="this.formService.Form1.get('sectionC').value.place !== null;
+                            else placeEmpty
+                          "
+                          >
+                          {{this.formService.Form1.get('sectionC').value.place}}
+                          </span>
+                        </p>
+                        <ng-template #placeEmpty>
+                          _________________
+                        </ng-template>
+                      </div>
+                      <div>
+                        <p class="signature-box block" id="signature-box">
+
+                          Name, Signature and Registration Number with Seal of
+                          the Gynaecologist/ Radiologist/Registered Medical
+                          Practitioner performing diagnostic Procedure/s</p>
+                      </div>
+                    </div>
+                  </section>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="visibility" >
+              <div class="row" id="pdfContentSectionD" #pdfContentSectionD>
+                <div>
+                  <div>
+                    <p class="bold">SECTION D: Declaration</p>
+                    <p class="bold">DECLARATION OF THE PERSON UNDERGOING PRE-NATAL DIAGNOSTIC TEST</p>
+                  </div>
+                  <div>
+                    <p>
+                      I, Mrs. / Mr.
+                      <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.name !== null; else nameEmpty">{{this.formService.Form1.get('sectionD').value.name}}</span> declare that by undergoing
+                      <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.diagnosis !== null; else diagnosisEmpty">{{this.formService.Form1.get('sectionD').value.diagnosis}}</span> Pre-Natal diagnostic test/procedure. I do not want to know the
+                      sex of my foetus.
+                    </p>
+                    <ng-template #nameEmpty>
+                      ____________________
+                    </ng-template>
+                    <ng-template #diagnosisEmpty>
+                      ____________________
+                    </ng-template>
+                    <div class="signature-container">
+                      <p>
+                        Date:- <span  class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.dateOfDeclaretion !== null; else dateOfDeclaretionEmpty"> {{this.formService.Form1.get('sectionD').value.dateOfDeclaretion | date:'dd/MM/yyyy'}}</span>
+                      </p>
+                      <ng-template #dateOfDeclaretionEmpty>____________________</ng-template>
+                      <div>
+                        <p class="signature-box block" id="signature-box">
+
+                          Signature / thumb impression of the person
+                          undergoing the pre-natal Diagnostic Test/procedure
+                        </p>
+                      </div>
+                    </div>
+
+                    <br>
+                    <p class="bold">In case of thumb impression</p>
+                    <hr>
+                    <p>
+                      Identified by (name)
+                       <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.nameOfIdentification !== null; else nameOfIdentificationEmpty">{{this.formService.Form1.get('sectionD').value.nameOfIdentification}}</span> age
+                       <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.age !== null; else ageEmpty">{{this.formService.Form1.get('sectionD').value.age}}</span>
+                      sex <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.gender !== null; else genderEmpty">{{this.formService.Form1.get('sectionD').value.gender}}</span>relation (if any)
+                      <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.relationship !== null; else relationshipEmpty">{{this.formService.Form1.get('sectionD').value.relationship}}</span> address
+                      <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.address !== null; else addressEmpty">{{this.formService.Form1.get('sectionD').value.address}}</span>
+                       and contact no
+                      <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.contactNumber !== null; else contactNumberEmpty">{{this.formService.Form1.get('sectionD').value.contactNumber}}</span>
+                    </p>
+                    <ng-template #nameOfIdentificationEmpty>____________________</ng-template>
+                    <ng-template #ageEmpty>____________________</ng-template>
+                    <ng-template #genderEmpty>____________________</ng-template>
+                    <ng-template #relationshipEmpty>____________________</ng-template>
+                    <ng-template #addressEmpty>____________________</ng-template>
+                    <ng-template #contactNumberEmpty>____________________</ng-template>
+
+                    <div class="signature-container">
+                      <p>
+                        Date:- <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.dateOfAttestation !== null;else  dateOfAttestationEmpty">{{this.formService.Form1.get('sectionD').value.dateOfAttestation | date:'dd/MM/yyyy'}}</span>
+                      </p>
+                      <ng-template #dateOfAttestationEmpty>
+                        ____________________
+                      </ng-template>
+                      <div>
+                        <p class="signature-box block" id="signature-box">
+
+                          Signature of the person attesting thumb impression
+                        </p>
+                      </div>
+                    </div>
+                    <br>
+                    <p class="bold">Declaration of Doctor/Person conducting per natal diagnostic procedure/test</p>
+                    <hr>
+                    <p>
+                      I, <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.nameOfPersonConductingTest !== null; else nameOfPersonConductingTestEmpty">{{this.formService.Form1.get('sectionD').value.nameOfPersonConductingTest}}</span>
+                      (name of the person conducting ultrasonography/image scanning) declare
+                      that while conducting ultrasonography/image scanning on Ms./Mr.
+                      <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.nameOfPersonReciveingTest !== null; else nameOfPersonReciveingTestEmpty">{{this.formService.Form1.get('sectionD').value.nameOfPersonReciveingTest}}</span>
+                      (name of the pregnant woman or the person undergoing pre natal diagnostic procedure/test), I have neither detected
+                      nor disclosed the sex of her fetus to anybody in any manner.
+                    </p>
+                    <ng-template #nameOfPersonConductingTestEmpty>
+                      ____________________
+                    </ng-template>
+                    <ng-template #nameOfPersonReciveingTestEmpty>
+                      ____________________
+                    </ng-template>
+
+                    <div class="signature-container">
+                      <p>
+                        Date:- <span class="text-decoration bold" *ngIf="this.formService.Form1.get('sectionD').value.dateOfConductingTest !== null; else dateOfConductingTestEmpty">{{this.formService.Form1.get('sectionD').value.dateOfConductingTest | date:'dd/MM/yyyy'}}</span>
+                      </p>
+                      <ng-template #dateOfConductingTestEmpty>
+                        ____________________
+                      </ng-template>
+                      <div>
+                        <p class="signature-box block" id="signature-box">
+
+                          Signature: ____________________________
+                          <br>
+                          Name in Conducting Diagnostic procedure
+                          Capitals, Registration Number with Seal of the
+                          Gynaecologist/Radiologist/Registered Medical Practitioner
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

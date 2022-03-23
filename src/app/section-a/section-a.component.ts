@@ -225,6 +225,8 @@ export class SectionAComponent implements OnInit {
   onClickultrasound(){
     const a1 = this.formService.Form1.get('sectionB');
     (<FormArray>a1.get('otherProcedure')).removeAt(0)
+    this.ultraBool = true
+    this.arrayBool = false
   }
 
   onClickBtn(){
@@ -233,6 +235,8 @@ export class SectionAComponent implements OnInit {
     if (a2.get('otherProcedure').value.length < 1){
       const a1 = this.formService.Form1.get('sectionB');
       (<FormArray>a1.get('otherProcedure')).push(control);
+      this.arrayBool = this.formService.Form1.get('sectionB').get("otherProcedure").value.length === 1
+      this.ultraBool = false
     }
 
   }
@@ -268,7 +272,7 @@ export class SectionAComponent implements OnInit {
         callback: (pdf) =>{
           pdf.deletePage(2);
           pdf.save("sectionA.pdf")
-          this.formService.Form1.reset()
+          this.formService.Form1.get('sectionA').reset()
           this.step = 2
         },
         margin:20
@@ -282,7 +286,7 @@ export class SectionAComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog result: ${result}`);
       });
-     console.log(this.formService.Form1.value);
+
     }
   }
   generatePDFSectionB(){
@@ -305,7 +309,7 @@ export class SectionAComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog result: ${result}`);
       });
-     console.log(this.formService.Form1.get('sectionB').value);
+
     }
 
   }
@@ -330,7 +334,7 @@ export class SectionAComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog result: ${result}`);
       });
-     console.log(this.formService.Form1.get('sectionC').value);
+
     }
 
   }
@@ -343,6 +347,7 @@ export class SectionAComponent implements OnInit {
         callback: (pdf) =>{
           pdf.deletePage(2);
           pdf.save("sectionD.pdf")
+          this.formService.Form1.get('sectionD').reset()
         },
         margin:20
       })
@@ -353,8 +358,10 @@ export class SectionAComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog result: ${result}`);
       });
-     console.log(this.formService.Form1.get('sectionD').value);
+
     }
 
   }
+
+
 }

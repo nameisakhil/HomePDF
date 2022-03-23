@@ -89,3 +89,20 @@ h6{
   border-radius: 20px;
   height: 26px;
 }
+
+.display-none{
+  display: none;
+}
+
+.width-inline{
+  width: 15vw;
+}
+
+.decimal-type li{
+  list-style-type: decimal;
+  margin-right: 8px;
+}
+
+.bold{
+  font-size: 12px;
+}

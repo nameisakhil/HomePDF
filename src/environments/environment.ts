@@ -4,13 +4,13 @@
 
 export const environment = {
   firebase: {
-    projectId: 'reactive-forms-557b9',
-    appId: '1:485329937017:web:522c16da0f9156d9e8eaa8',
-    databaseURL: 'https://reactive-forms-557b9-default-rtdb.firebaseio.com',
-    storageBucket: 'reactive-forms-557b9.appspot.com',
-    apiKey: 'AIzaSyAK3NmDnaVpHPyl7rw2G02p23ka1lqaUVU',
-    authDomain: 'reactive-forms-557b9.firebaseapp.com',
-    messagingSenderId: '485329937017',
+    apiKey: "AIzaSyCbCmwvMGu_0oDUv0tfdjSxpItiM1nxNa0",
+    authDomain: "formfdata.firebaseapp.com",
+    databaseURL: "https://formfdata-default-rtdb.firebaseio.com",
+    projectId: "formfdata",
+    storageBucket: "formfdata.appspot.com",
+    messagingSenderId: "918998402768",
+    appId: "1:918998402768:web:ea9ef5ca2806d4e81000d5"
   },
   production: false
 };

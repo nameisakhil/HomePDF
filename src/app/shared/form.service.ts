@@ -328,15 +328,15 @@ export class FormService {
             'Research OR scientific studies in recognized institutions':user.sectionB.checkBoxs['Research OR scientific studies in recognized institutions'],
         }),
         'procedure':user.sectionB.procedure,
-          'otherProcedure':user.sectionB.otherProcedure,
-          'dateOfDeclaration':user.sectionB.dateOfDeclaration,
-          'dateOfProcedure':user.sectionB.dateOfProcedure,
-          'resultOfProcedure':user.sectionB.resultOfProcedure,
-          'resultConveyedTo':user.sectionB.resultConveyedTo,
-          'resultConveyedOn':user.sectionB.resultConveyedOn,
-          'indication':user.sectionB.indication,
-          'date':user.sectionB.date,
-          'place':user.sectionB. place,
+        'otherProcedure':user.sectionB.otherProcedure,
+        'dateOfDeclaration':user.sectionB.dateOfDeclaration,
+        'dateOfProcedure':user.sectionB.dateOfProcedure,
+        'resultOfProcedure':user.sectionB.resultOfProcedure,
+        'resultConveyedTo':user.sectionB.resultConveyedTo,
+        'resultConveyedOn':user.sectionB.resultConveyedOn,
+        'indication':user.sectionB.indication,
+        'date':user.sectionB.date,
+        'place':user.sectionB. place,
       }),
       'sectionC':({
         'doctorName': user.sectionC.doctorName,
@@ -412,6 +412,10 @@ export class FormService {
 
   deleteUser($key){
     this.formList.remove($key);
+  }
+
+  populateData(user){
+    this.Form1.patchValue(user);
   }
 }
 
